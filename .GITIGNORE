@@ -1,6 +1,6 @@
 *.html
 *.pdf
-*.txt
+
 *.xlsx
 *.pptx
 *.docx
@@ -10,3 +10,5 @@
 .ipynb_checkpoints
 old
 ~historical
+
+chem_reactor_ml_env

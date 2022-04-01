@@ -1,0 +1,13 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\rgkal\Documents\chem_reactor_ml> python -m venv chem_reactor_ml_env
+PS C:\Users\rgkal\Documents\chem_reactor_ml> .\chem_reactor_ml_env\Scripts\activate
+
+Do you want to run software from this untrusted publisher?
+File C:\Users\rgkal\Documents\chem_reactor_ml\chem_reactor_ml_env\Scripts\Activate.ps1 is published by CN=Python Software Foundation, O=Python Software 
+Foundation, L=Wolfeboro, S=New Hampshire, C=US and is not trusted on your system. Only run scripts from trusted publishers.
+[V] Never run  [D] Do not run  [R] Run once  [A] Always run  [?] Help (default is "D"): r
+(chem_reactor_ml_env) PS C:\Users\rgkal\Documents\chem_reactor_ml> pip install -r requirements.txt
