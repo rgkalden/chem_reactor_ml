@@ -12,3 +12,5 @@ old
 ~historical
 
 chem_reactor_ml_env
+
+__pycache__
