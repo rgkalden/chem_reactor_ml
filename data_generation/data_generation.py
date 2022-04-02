@@ -54,6 +54,7 @@ num_samples = 100000
 mode_1_frac = 0.6
 mode_2_frac = 0.3
 
+# Mode 1, Mode 2, Mode 3 = Noise
 mode_label_list = [1, 2, 3]
 
 # run generate_dataset function
