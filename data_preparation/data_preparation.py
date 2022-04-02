@@ -1,13 +1,11 @@
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 
-# input parameter variables
-feature_list = ['Fao', 'Fbo', 'P', 'To', 'Cto', 'm', 'Ta']
-target_variable = 'Yc'
-dataframe = pd.read_csv('data_generation/reactor_performance_data.csv')
-
-def data_preparation(dataframe, feature_list, target_variable, test_size=0.4, random_state=42, print_shapes=False):
+def data_preparation(dataframe, feature_list, target_variable,
+                     test_size=0.4, random_state=42, 
+                     print_shapes=False, standardize=False):
     
     X = dataframe[feature_list]
     y = dataframe[target_variable]
@@ -19,17 +17,31 @@ def data_preparation(dataframe, feature_list, target_variable, test_size=0.4, ra
         print('X_train ', X_train.shape)
         print('y_train ', y_train.shape)
         print('X_test ', X_test.shape)
-        print('y_test ', y_test.shape)
+        print('y_test ', y_test.shape)   
 
-    return X_train, X_test, y_train, y_test
+    if standardize == False:
+        return X_train, X_test, y_train, y_test
+    elif standardize == True:
+        scaler = StandardScaler()
+        scaler.fit(X_train)
+        X_train = scaler.transform(X_train)
+        X_test = scaler.transform(X_test)
+        return X_train, X_test, y_train, y_test
 
 # Test code
+
+# input parameter variables
+feature_list = ['Fao', 'Fbo', 'P', 'To', 'Cto', 'm', 'Ta']
+target_variable = 'Yc'
+dataframe = pd.read_csv('data_generation/reactor_performance_data.csv')
+
 X_train, X_test, y_train, y_test = data_preparation(dataframe, 
                                                     feature_list, 
                                                     target_variable, 
                                                     test_size=0.4, 
                                                     random_state=42,
-                                                    print_shapes=True)
+                                                    print_shapes=True,
+                                                    standardize=True)
 
-print(X_train.head())
-print(y_train.head())
+print(X_train[:5])
+print(y_train[:5])
