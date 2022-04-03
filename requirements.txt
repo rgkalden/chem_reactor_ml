@@ -5,6 +5,7 @@ matplotlib
 seaborn
 
 sklearn
+keras
 tensorflow
 
 ipykernel

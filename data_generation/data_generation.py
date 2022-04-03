@@ -50,13 +50,9 @@ def generate_dataset(params, t_eval, base_dict_1, lim_dict_1, base_dict_2, lim_d
     print('Dataset saved as ' + filename)
 
 # Set parameters for dataset size
-#num_samples = 100000
-#mode_1_frac = 0.6
-#mode_2_frac = 0.3
-
 num_samples = 10000
-mode_1_frac = 0.4
-mode_2_frac = 0.5
+mode_1_frac = 0.6
+mode_2_frac = 0.3
 
 # Mode 1, Mode 2, Mode 3 = Noise
 mode_label_list = [1, 2, 3]
