@@ -1,13 +1,13 @@
-numpy
-pandas
-scipy
-matplotlib
-seaborn
+numpy==1.22.3
+pandas==1.4.2
+scipy==1.8.0
+matplotlib==3.5.1
+seaborn==0.11.2
 
 sklearn
-keras
-tensorflow
+keras==2.8.0
+tensorflow==2.8.0
 
-ipykernel
+ipykernel==6.11.0
 
-tqdm
+tqdm==4.63.1

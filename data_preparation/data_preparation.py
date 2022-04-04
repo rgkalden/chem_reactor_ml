@@ -27,21 +27,3 @@ def data_preparation(dataframe, feature_list, target_variable,
         X_train = scaler.transform(X_train)
         X_test = scaler.transform(X_test)
         return X_train, X_test, y_train, y_test
-
-# Test code
-
-# input parameter variables
-# feature_list = ['Fao', 'Fbo', 'P', 'To', 'Cto', 'm', 'Ta']
-# target_variable = 'Yc'
-# dataframe = pd.read_csv('data_generation/reactor_performance_data.csv')
-
-# X_train, X_test, y_train, y_test = data_preparation(dataframe, 
-#                                                     feature_list, 
-#                                                     target_variable, 
-#                                                     test_size=0.4, 
-#                                                     random_state=42,
-#                                                     print_shapes=True,
-#                                                     standardize=True)
-
-# print(X_train[:5])
-# print(y_train[:5])

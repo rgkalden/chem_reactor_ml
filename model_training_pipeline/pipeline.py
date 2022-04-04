@@ -7,7 +7,7 @@ import sys
 sys.path.append(r'C:\Users\rgkal\Documents\chem_reactor_ml\data_generation')
 sys.path.append(r'C:\Users\rgkal\Documents\chem_reactor_ml\data_preparation')
 sys.path.append(r'C:\Users\rgkal\Documents\chem_reactor_ml\model_training')
-# print(sys.path)
+#print(sys.path)
 
 import data_generation
 import data_preparation
@@ -57,22 +57,23 @@ target_variable = 'Yc'
 test_size = 0.4
 
 # dataset filepath, if data has been generated already
-data_filepath = './data_generation/reactor_performance_data.csv'
+data_filepath_1 = 'reactor_performance_data.csv'
 
-if os.path.exists(data_filepath) == True:
-    print('Dataset found')
-    dataframe = pd.read_csv(data_filepath)
+if os.path.exists(data_filepath_1) == True:
+    print('Dataset found, loading from', data_filepath_1)
+    dataframe = pd.read_csv(data_filepath_1)
 else:
     print('Dataset not found, generating...')
     data_generation.generate_dataset(params, t_eval, base_dict_1, lim_dict_1, base_dict_2, lim_dict_2,
                  num_samples, mode_1_frac, mode_2_frac, mode_label_list, filename='reactor_performance_data.csv')
     dataframe = pd.read_csv('reactor_performance_data.csv')
+    print('Dataset generated')
 
-print('Model Training...')
+print('Preparing Data...')
 X_train, X_test, y_train, y_test = data_preparation.data_preparation(dataframe, feature_list, target_variable,
                                                     test_size=0.4, random_state=42, 
                                                     print_shapes=False, standardize=False)
 
-model_training.train_model(X_train, X_test, y_train, y_test, feature_list, print_metric=True, print_importances=True)
-
-
+print('Model Training...')
+model = model_training.train_model(X_train, X_test, y_train, y_test, feature_list, 
+                                   print_metric=True, print_importances=True, save_model=True)

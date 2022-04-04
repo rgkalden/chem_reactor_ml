@@ -3,8 +3,10 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error
+from joblib import dump
+import sklearn
 
-def train_model(X_train, X_test, y_train, y_test, feature_list, print_metric=True, print_importances=True):
+def train_model(X_train, X_test, y_train, y_test, feature_list, print_metric=False, print_importances=False, save_model=True):
 
     rfm = RandomForestRegressor(random_state=0, verbose=0)
     rfm.fit(X_train, y_train)
@@ -22,3 +24,9 @@ def train_model(X_train, X_test, y_train, y_test, feature_list, print_metric=Tru
         rfimp_df.set_index('Feature', inplace=True)
         rfimp_df.apply(lambda s: s.apply('{0:.5f}'.format))
         print(rfimp_df)
+
+    if save_model == True:
+        dump(rfm, 'model.joblib')
+        print('Model object saved. sklearn version:', sklearn.__version__)
+        
+    return rfm
