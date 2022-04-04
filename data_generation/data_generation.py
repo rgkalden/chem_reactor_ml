@@ -1,18 +1,16 @@
 import numpy as np
 import pandas as pd
-from scipy.integrate import solve_ivp
-import math
 
 from data_generation_functions import *
 
-# Process condition parameters
-# Mode 1 parameters
-base_dict_1 = {'Fa': 5, 'Fb': 10, 'P': 4.92, 'To': 300, 'm': 10, 'Ta': 325}
-lim_dict_1 = {'Fa': 0.1, 'Fb': 0.1, 'P': 0.1, 'To': 0.03, 'm': 0.2, 'Ta': 0.03}
+# # Process condition parameters
+# # Mode 1 parameters
+# base_dict_1 = {'Fa': 5, 'Fb': 10, 'P': 4.92, 'To': 300, 'm': 10, 'Ta': 325}
+# lim_dict_1 = {'Fa': 0.1, 'Fb': 0.1, 'P': 0.1, 'To': 0.03, 'm': 0.2, 'Ta': 0.03}
 
-# Mode 2 parameters
-base_dict_2 = {'Fa': 3, 'Fb': 4, 'P': 10, 'To': 500, 'm': 5, 'Ta': 325}
-lim_dict_2 = {'Fa': 0.05, 'Fb': 0.05, 'P': 0.05, 'To': 0.015, 'm': 0.1, 'Ta': 0.015}
+# # Mode 2 parameters
+# base_dict_2 = {'Fa': 3, 'Fb': 4, 'P': 10, 'To': 500, 'm': 5, 'Ta': 325}
+# lim_dict_2 = {'Fa': 0.05, 'Fb': 0.05, 'P': 0.05, 'To': 0.015, 'm': 0.1, 'Ta': 0.015}
 
 
 def generate_dataset(params, t_eval, base_dict_1, lim_dict_1, base_dict_2, lim_dict_2,
@@ -50,13 +48,13 @@ def generate_dataset(params, t_eval, base_dict_1, lim_dict_1, base_dict_2, lim_d
     print('Dataset saved as ' + filename)
 
 # Set parameters for dataset size
-num_samples = 10000
-mode_1_frac = 0.6
-mode_2_frac = 0.3
+# num_samples = 10000
+# mode_1_frac = 0.6
+# mode_2_frac = 0.3
 
 # Mode 1, Mode 2, Mode 3 = Noise
-mode_label_list = [1, 2, 3]
+# mode_label_list = [1, 2, 3]
 
 # run generate_dataset function
-generate_dataset(params, t_eval, base_dict_1, lim_dict_1, base_dict_2, lim_dict_2,
-                 num_samples, mode_1_frac, mode_2_frac, mode_label_list, filename='reactor_performance_data.csv')
+# generate_dataset(params, t_eval, base_dict_1, lim_dict_1, base_dict_2, lim_dict_2,
+#                  num_samples, mode_1_frac, mode_2_frac, mode_label_list, filename='reactor_performance_data.csv')
