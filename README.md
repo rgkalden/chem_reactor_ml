@@ -1,8 +1,13 @@
 # Applying Machine Learning to Industrial Chemical Reactors
 
-This repository contains files related to the application of Machine Learning to Industrial Chemical Reactors. Two different POC's have been developed for predicting reactor performance and improving process safety, and the concepts have been developed in Jupyter Notebooks in the `Proof of Concept` folder.
+This repository contains files related to the application of Machine Learning to Industrial Chemical Reactors. Two different POC's have been developed for predicting reactor performance and improving process safety, and the concepts have been developed in Jupyter Notebooks in the `Proof of Concept` folder. To become more familiar with the concepts behind this project it is recommended to read the notebook `Reactor Model Part 1 v5.ipynb` before browsing further.
 
-The main objective of this work is to build a machine learning pipeline for the first application, predicting chemical reactor performance, to further develop the concept into an example of a production ready, deployable machine learning model.
+Main objectives of this project are to:
+1. Convert POC notebook into Python scripts
+2. Build a model training pipeline
+3. Create capability to generate new synthetic data to feed to the trained model
+4. Develop inference pipeline (batch/real time)
+5. Deploy model, monitor data drift
 
 ## 1. Getting Started
 
