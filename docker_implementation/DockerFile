@@ -1,5 +1,9 @@
 FROM jupyter/scipy-notebook
 
+RUN mkdir my-model
+ENV MODEL_DIR=/home/jovyan/my-model
+ENV MODEL_FILE=model.joblib
+
 COPY requirements.txt ./requirements.txt
 RUN pip install -r requirements.txt
 
@@ -12,7 +16,6 @@ COPY data_generation.py ./data_generation.py
 COPY data_preparation.py ./data_preparation.py
 COPY model_training.py ./model_training.py
 COPY pipeline.py ./pipeline.py
-
 
 COPY inference_script.py ./inference_script.py
 

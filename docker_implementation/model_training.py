@@ -5,6 +5,11 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error
 from joblib import dump
 import sklearn
+import os
+
+MODEL_DIR = os.environ["MODEL_DIR"]
+MODEL_FILE = os.environ["MODEL_FILE"]
+MODEL_PATH = os.path.join(MODEL_DIR, MODEL_FILE)
 
 def train_model(X_train, X_test, y_train, y_test, feature_list, print_metric=False, print_importances=False, save_model=True):
 
@@ -26,7 +31,7 @@ def train_model(X_train, X_test, y_train, y_test, feature_list, print_metric=Fal
         print(rfimp_df)
 
     if save_model == True:
-        dump(rfm, 'model.joblib')
+        dump(rfm, MODEL_PATH)
         print('Model object saved. sklearn version:', sklearn.__version__)
         
     return rfm

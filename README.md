@@ -61,3 +61,7 @@ Folder contains a script to train a random forest model.
 ### 2.6 Model Training Pipeline
 
 In this folder, the `pipeline.py` script can be executed to run the entire model training pipeline.
+
+### 2.7 Docker Implementation
+
+Package code from the previous sections into a docker container.

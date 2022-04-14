@@ -7,3 +7,9 @@ cd to docker_implementation folder
 docker build -t docker-ml-model -f DockerFile .
 
 docker run docker-ml-model python3 inference_script.py
+
+docker container ls --latest
+
+Get container name for example "heuristic_ritchie"
+
+docker cp heuristic_ritchie:/home/jovyan/output.csv ./predictions.csv
