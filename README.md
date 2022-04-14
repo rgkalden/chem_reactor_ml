@@ -19,13 +19,13 @@ The Python package requirements are provided in `requirements.txt`. The work in 
 >in order to have relative paths work when importing csv. Setting makes the project folder the root directory,
 >not the folder where this notebook is saved
 
->NOTE: In order to run the pipeline `pipeline.py` it may be required to add paths to PYTHONPATH for the modules saved in their >respective folders, with the following code:
+>NOTE: In order to run the pipeline `pipeline.py` it may be required to add paths to PYTHONPATH for the modules saved in their respective folders, with the following code:
 
     # Check to add module folders to python path, so the python interpreter can find modules to import
     import sys
-    sys.path.append(r'C:\Users\rgkal\Documents\chem_reactor_ml\data_generation')
-    sys.path.append(r'C:\Users\rgkal\Documents\chem_reactor_ml\data_preparation')
-    sys.path.append(r'C:\Users\rgkal\Documents\chem_reactor_ml\model_training')
+    sys.path.append(r'<path to project>\chem_reactor_ml\data_generation')
+    sys.path.append(r'<path to project>\chem_reactor_ml\data_preparation')
+    sys.path.append(r'<path to project>\chem_reactor_ml\model_training')
     print(sys.path)
 
 ### 1.2 Running the Model Training Pipeline

@@ -1,0 +1,19 @@
+FROM jupyter/scipy-notebook
+
+COPY requirements.txt ./requirements.txt
+RUN pip install -r requirements.txt
+
+COPY reactor_performance_data.csv ./reactor_performance_data.csv
+COPY new_data.csv ./new_data.csv
+
+COPY pipeline.py ./pipeline.py
+COPY data_generation_functions.py ./data_generation_functions.py
+COPY data_generation.py ./data_generation.py
+COPY data_preparation.py ./data_preparation.py
+COPY model_training.py ./model_training.py
+COPY pipeline.py ./pipeline.py
+
+
+COPY inference_script.py ./inference_script.py
+
+RUN python3 pipeline.py
