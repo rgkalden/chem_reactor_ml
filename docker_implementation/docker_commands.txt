@@ -6,7 +6,7 @@ cd to docker_implementation folder
 
 docker build -t docker-ml-model -f DockerFile .
 
-docker run docker-ml-model python3 inference_script.py
+docker run -v "${PWD}/new_data.csv:/home/jovyan/new_data.csv" docker-ml-model python3 inference_script.py
 
 docker container ls --latest
 

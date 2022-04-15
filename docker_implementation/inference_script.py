@@ -1,5 +1,3 @@
-# Run script from project root folder
-
 import numpy as np
 import pandas as pd
 from joblib import load
