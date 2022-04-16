@@ -65,3 +65,7 @@ In this folder, the `pipeline.py` script can be executed to run the entire model
 ### 2.7 Docker Implementation
 
 Package code from the previous sections into a docker container.
+
+### 2.8 AWS Implementation
+
+Folder containing files related to the development of the machine learning model on AWS Sagemaker and the implementation of the pipeline on AWS.
