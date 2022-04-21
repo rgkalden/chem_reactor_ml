@@ -29,5 +29,5 @@ y = model.predict(X)
 print('Predictions generated for new data')
 
 predictions_file = 'predictions.csv'
-predictions = pd.DataFrame(y).to_csv(output_path, index=False)
+predictions = pd.DataFrame(y).to_csv(output_path, index=False, header=None)
 print('Predictions saved as', output_path)
