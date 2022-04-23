@@ -8,7 +8,7 @@ Many products from industrial chemical processes are manufactured in a chemical 
 
 The design of an efficient chemical reactor must take into consideration the feed conditions, energy requirements, side reactions, as well as the desired product quality. The economics of the process may depend on the ability to create a product of a certain quality, for example, an inefficient reactor may require additional equipment to separate out the desired product from the undesired products. A useful performance metric to measure the amount of desired product is the **overall yield (Y)**, defined generally as:
 
-<img src="https://render.githubusercontent.com/render/math?math=Y = \frac{amount \space of \space desired \space product \space produced}{amount \space of \space feed \space component \space reacted}">
+<img src="https://render.githubusercontent.com/render/math?math=\color{white}Y = \frac{amount \space of \space desired \space product \space produced}{amount \space of \space feed \space component \space reacted}">
 
 In other words, the overall yield is a fraction (values from 0 to 1) representing how much product is created for the amount of feed that is sent to the reactor. Once a chemical reactor is in operation, the yield must still be maximized by adapting to changes in process conditions in order to maintain the desired product quality. 
 
