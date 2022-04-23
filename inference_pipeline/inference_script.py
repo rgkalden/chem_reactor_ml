@@ -20,5 +20,6 @@ y = model.predict(X)
 print('Predictions generated for new data')
 
 predictions_file = 'inference_pipeline/predictions.csv'
-predictions = pd.DataFrame(y).to_csv(predictions_file, index=False, header=None)
+predictions = pd.DataFrame(y).to_csv(
+    predictions_file, index=False, header=None)
 print('Predictions saved as', predictions_file)

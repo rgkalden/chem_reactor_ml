@@ -6,24 +6,25 @@ from tqdm import tqdm
 
 # Reaction chemistry parameters
 params = {'V': 20,
-         'E2': 14000,
-         'k2c_const': 40,
-         'y': 1,
-         'R': 1.987,
-         'To': 300,
-         'E1': 8000,
-         'Cto': 0.2,
-         'Cpco': 18.02,
-         'm': 10,
-         'k1a_const': 40,
-         'DH1b': -10000,
-         'DH2a': -8000,
-         'Cpd': 16,
-         'Cpa': 10,
-         'Cpb': 12,
-         'Cpc': 14,
-         'Ua': 80}
+          'E2': 14000,
+          'k2c_const': 40,
+          'y': 1,
+          'R': 1.987,
+          'To': 300,
+          'E1': 8000,
+          'Cto': 0.2,
+          'Cpco': 18.02,
+          'm': 10,
+          'k1a_const': 40,
+          'DH1b': -10000,
+          'DH2a': -8000,
+          'Cpd': 16,
+          'Cpa': 10,
+          'Cpb': 12,
+          'Cpc': 14,
+          'Ua': 80}
 t_eval = np.linspace(0, params['V'], params['V'] + 1)
+
 
 def odes(V, x):
     try:
@@ -33,7 +34,7 @@ def odes(V, x):
         Fc = x[2]
         Fd = x[3]
         T = x[4]
-        Ta = x[5]        
+        Ta = x[5]
         # explicit equations and constants
         E2 = params['E2']
         y = params['y']
@@ -43,7 +44,7 @@ def odes(V, x):
         k2c = params['k2c_const'] * math.exp((E2/R)*(1/300 - 1/T))
         E1 = params['E1']
         Cto = params['Cto']
-        Ca = Cto * (Fa/Ft) * (To/T) * y    
+        Ca = Cto * (Fa/Ft) * (To/T) * y
         Cc = Cto * (Fc/Ft) * (To/T) * y
         r2c = -k2c * Ca**2 * Cc**3
         Cpco = params['Cpco']
@@ -64,11 +65,11 @@ def odes(V, x):
         sumFiCpi = Cpa * Fa + Cpb * Fb + Cpc * Fc + Cpd * Fd
         rc = r1c + r2c
         Ua = params['Ua']
-        r2d = -3/3 * r2c # -1/3 changed to -3/3
+        r2d = -3/3 * r2c  # -1/3 changed to -3/3
         ra = r1a + r2a
         rd = r2d
         Qg = r1b * DH1b + r2a * DH2a
-        Qr = Ua * (T - Ta)    
+        Qr = Ua * (T - Ta)
         # define each ODE
         dFa_dV = ra
         dFb_dV = rb
@@ -80,13 +81,15 @@ def odes(V, x):
     except:
         pass
 
+
 def gen_rand_num(mean, std):
     return float(np.random.normal(mean, std, 1))
 
-def generate_data(num_samples, base_dict, lim_dict, params, t_eval, random_seed, mode):    
-    sample_list = []    
+
+def generate_data(num_samples, base_dict, lim_dict, params, t_eval, random_seed, mode):
+    sample_list = []
     np.random.seed(random_seed)
-    for i in tqdm(range(0, num_samples)):        
+    for i in tqdm(range(0, num_samples)):
         # Flowrates
         Fao = gen_rand_num(base_dict['Fa'], base_dict['Fa'] * lim_dict['Fa'])
         Fbo = gen_rand_num(base_dict['Fb'], base_dict['Fb'] * lim_dict['Fb'])
@@ -109,7 +112,7 @@ def generate_data(num_samples, base_dict, lim_dict, params, t_eval, random_seed,
         #    [Fa, Fb, Fc, Fd, T, Ta]
         xo = [Fao, Fbo, 0, 0, To, Ta]
         # Solve ODEs
-        solution = solve_ivp(odes, [0, params['V']], xo, t_eval = t_eval)
+        solution = solve_ivp(odes, [0, params['V']], xo, t_eval=t_eval)
         # Calculate outlet values
         Fao = solution.y[0][0]
         Fa_out = solution.y[0][-1]
@@ -118,39 +121,49 @@ def generate_data(num_samples, base_dict, lim_dict, params, t_eval, random_seed,
         Fd_out = solution.y[3][-1]
         F_out = Fa_out + Fb_out + Fc_out + Fd_out
         To = xo[4]
-        T_out = solution.y[4][-1]        
+        T_out = solution.y[4][-1]
         T_max = max(solution.y[4])
         Cc_out = params['Cto'] * (Fc_out / F_out) * (To / T_out)
         Xa = (Fao - Fa_out) / Fao
         #S_cd = Fc_out / Fd_out
-        Yc = Fc_out / (Fao - Fa_out)        
-        sample_list.append([mode, Fao, Fbo, P, To, Cto, m, Ta, T_max, Fa_out, Fb_out, Fc_out, Fd_out, Cc_out, Xa, Yc])        
-    data = np.asarray(sample_list)    
+        Yc = Fc_out / (Fao - Fa_out)
+        sample_list.append([mode, Fao, Fbo, P, To, Cto, m, Ta,
+                           T_max, Fa_out, Fb_out, Fc_out, Fd_out, Cc_out, Xa, Yc])
+    data = np.asarray(sample_list)
     return data
 
 # Noise
+
+
 def noise_value(key, base_dict_1, base_dict_2):
     high = max([base_dict_1[key], base_dict_2[key]])
-    low = min([base_dict_1[key], base_dict_2[key]])    
+    low = min([base_dict_1[key], base_dict_2[key]])
     return float(np.random.uniform(low, high, 1))
 
-def generate_noise_data(num_samples, base_dict_1, base_dict_2, lim_dict, params, t_eval, random_seed, mode):    
-    sample_list = []    
+
+def generate_noise_data(num_samples, base_dict_1, base_dict_2, lim_dict, params, t_eval, random_seed, mode):
+    sample_list = []
     np.random.seed(random_seed)
-    for i in tqdm(range(0, num_samples)):        
+    for i in tqdm(range(0, num_samples)):
         # Flowrates
-        Fao = noise_value(key='Fa', base_dict_1=base_dict_1, base_dict_2=base_dict_2)
-        Fbo = noise_value(key='Fb', base_dict_1=base_dict_1, base_dict_2=base_dict_2)
+        Fao = noise_value(key='Fa', base_dict_1=base_dict_1,
+                          base_dict_2=base_dict_2)
+        Fbo = noise_value(key='Fb', base_dict_1=base_dict_1,
+                          base_dict_2=base_dict_2)
         # Pressure
-        P = noise_value(key='P', base_dict_1=base_dict_1, base_dict_2=base_dict_2)
+        P = noise_value(key='P', base_dict_1=base_dict_1,
+                        base_dict_2=base_dict_2)
         # Inlet Temperature
-        To = noise_value(key='To', base_dict_1=base_dict_1, base_dict_2=base_dict_2)
+        To = noise_value(key='To', base_dict_1=base_dict_1,
+                         base_dict_2=base_dict_2)
         # Inlet Total Concentration
         Cto = P / (0.082 * To)
         # Cooling medium flowrate
-        m = noise_value(key='m', base_dict_1=base_dict_1, base_dict_2=base_dict_2)        
+        m = noise_value(key='m', base_dict_1=base_dict_1,
+                        base_dict_2=base_dict_2)
         # Inlet cooling medium temperature
-        Ta = gen_rand_num(base_dict_1['Ta'], base_dict_1['Ta'] * lim_dict['Ta'])
+        Ta = gen_rand_num(base_dict_1['Ta'],
+                          base_dict_1['Ta'] * lim_dict['Ta'])
         # update params dictionary
         params['To'] = To
         params['Cto'] = Cto
@@ -160,7 +173,7 @@ def generate_noise_data(num_samples, base_dict_1, base_dict_2, lim_dict, params,
         #    [Fa, Fb, Fc, Fd, T, Ta]
         xo = [Fao, Fbo, 0, 0, To, Ta]
         # Solve ODEs
-        solution = solve_ivp(odes, [0, params['V']], xo, t_eval = t_eval)
+        solution = solve_ivp(odes, [0, params['V']], xo, t_eval=t_eval)
         # Calculate outlet values
         Fao = solution.y[0][0]
         Fa_out = solution.y[0][-1]
@@ -169,13 +182,13 @@ def generate_noise_data(num_samples, base_dict_1, base_dict_2, lim_dict, params,
         Fd_out = solution.y[3][-1]
         F_out = Fa_out + Fb_out + Fc_out + Fd_out
         To = xo[4]
-        T_out = solution.y[4][-1]        
+        T_out = solution.y[4][-1]
         T_max = max(solution.y[4])
         Cc_out = params['Cto'] * (Fc_out / F_out) * (To / T_out)
         Xa = (Fao - Fa_out) / Fao
         #S_cd = Fc_out / Fd_out
-        Yc = Fc_out / (Fao - Fa_out)        
-        sample_list.append([mode, Fao, Fbo, P, To, Cto, m, Ta, T_max, Fa_out, Fb_out, Fc_out, Fd_out, Cc_out, Xa, Yc])        
-    data = np.asarray(sample_list)    
+        Yc = Fc_out / (Fao - Fa_out)
+        sample_list.append([mode, Fao, Fbo, P, To, Cto, m, Ta,
+                           T_max, Fa_out, Fb_out, Fc_out, Fd_out, Cc_out, Xa, Yc])
+    data = np.asarray(sample_list)
     return data
-

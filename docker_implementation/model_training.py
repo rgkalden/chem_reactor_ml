@@ -11,6 +11,7 @@ MODEL_DIR = os.environ["MODEL_DIR"]
 MODEL_FILE = os.environ["MODEL_FILE"]
 MODEL_PATH = os.path.join(MODEL_DIR, MODEL_FILE)
 
+
 def train_model(X_train, X_test, y_train, y_test, feature_list, print_metric=False, print_importances=False, save_model=True):
 
     rfm = RandomForestRegressor(random_state=0, verbose=0)
@@ -23,7 +24,8 @@ def train_model(X_train, X_test, y_train, y_test, feature_list, print_metric=Fal
         print('MAE for Random Forest: ', round(rfm_mae, 5))
 
     if print_importances == True:
-        rf_dict = {'Feature':np.asarray(feature_list), 'Random Forest Importance':rfm.feature_importances_}
+        rf_dict = {'Feature': np.asarray(
+            feature_list), 'Random Forest Importance': rfm.feature_importances_}
 
         rfimp_df = pd.DataFrame(rf_dict, index=None)
         rfimp_df.set_index('Feature', inplace=True)
@@ -33,5 +35,5 @@ def train_model(X_train, X_test, y_train, y_test, feature_list, print_metric=Fal
     if save_model == True:
         dump(rfm, MODEL_PATH)
         print('Model object saved. sklearn version:', sklearn.__version__)
-        
+
     return rfm

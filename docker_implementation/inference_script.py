@@ -10,7 +10,7 @@ MODEL_PATH = os.path.join(MODEL_DIR, MODEL_FILE)
 dirpath = os.getcwd()
 print("dirpath = ", dirpath)
 
-output_path = os.path.join(dirpath,'output.csv')
+output_path = os.path.join(dirpath, 'output.csv')
 print(output_path)
 
 model_path = MODEL_PATH
