@@ -5,7 +5,12 @@
 *.pptx
 *.docx
 
-*.csv
+predictions.csv
+
+aws_implementation/data/test_data.csv
+aws_implementation/data/train_data.csv
+
+aws_implementation/demo/
 
 .ipynb_checkpoints
 old
