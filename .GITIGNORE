@@ -10,7 +10,8 @@ predictions.csv
 aws_implementation/data/test_data.csv
 aws_implementation/data/train_data.csv
 
-aws_implementation/demo/
+aws_implementation/demo/data/train_data.csv
+aws_implementation/demo/data/test_data.csv
 
 .ipynb_checkpoints
 old
