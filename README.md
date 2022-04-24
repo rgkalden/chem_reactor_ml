@@ -1,6 +1,6 @@
 # Applying Machine Learning to Industrial Chemical Reactors
 
-This repository contains files related to the application of Machine Learning to Industrial Chemical Reactors. Two different POC's have been developed for predicting reactor performance and improving process safety, and the concepts have been developed in Jupyter Notebooks in the `Proof of Concept` folder. 
+This repository contains files related to the application of Machine Learning to Industrial Chemical Reactors. Two different POC's have been developed for predicting reactor performance and improving process safety, and the concepts have been developed in Jupyter Notebooks in the `Proof of Concept` folder. The goal of this project is to further advance the work on predicting reactor performance using machine learning, and more background detail is provided below.
 
 **Background Information**
 
@@ -18,17 +18,20 @@ The purpose of this project is to demonstrate how machine learning can be used t
 
 **Value Proposition**
 
-Chemical reactors involve many complex chemical and physical processes that can make modelling by traditional means difficult, despite strong knowledge of the underlying scientific principles involved, so machine learning is an ideal technique to experiment with by taking advantage of historical operating data to build a statistical model instead of first principles.
+Chemical reactors involve many complex chemical and physical processes that can make modelling by traditional means difficult, despite strong knowledge of the underlying scientific principles involved, so machine learning is an ideal technique to experiment with by taking advantage of historical operating data to build a statistical model instead of one based on first principles.
 
-The advantage of using a machine learning model to predict the yield over taking samples of the reactor products and calculating the yield directly is that it only requires enough sampling to establish a dataset suitable for a model to be trained on, and then the model can be put into use making real time predictions for the product yield, with no additional sampling or other equipment required.
+The advantage of using a machine learning model to predict the yield over taking samples of the reactor products and calculating the yield directly is that the model can be put into use making real time predictions for the product yield to help maintain the maximum yield while minimizing the requirement for additional sampling in the future. If there is enough suitable historical data for the operating conditions of the reactor, and adequate sampling to determine historical yields, then it is likely possible to gather a dataset suitable for a model to be trained on, and develop a machine learning solution for predicting reactor performance.
 
 **Project Objectives**
-1. Convert POC notebook into Python scripts
-2. Build a model training pipeline
-3. Create capability to generate new synthetic data to feed to the trained model
-4. Develop inference pipeline (batch/real time)
-5. Deploy model (Docker and cloud)
-6. Monitor data drift
+
+This project has the following objectives:
+1. Convert POC notebook `Reactor Model Part 1 v5.ipynb` into Python scripts ✔
+2. Build a model training pipeline to run locally ✔
+3. Create capability to generate new synthetic data to feed to the trained model ✔
+4. Develop inference pipeline ✔
+5. Build Docker image for the model training pipeline, include inferencing capability, and run a container to generate predictions locally ✔
+6. Train model on AWS Sagemaker, deploy to endpoint, and generate predictions. Load new data from AWS S3 and save predictions to S3 ✔
+7. Monitor data drift using the model monitor functionality of Sagemaker 🚧
 
 ## 1. Getting Started
 
@@ -61,7 +64,9 @@ The Python package requirements are provided in `requirements.txt`. The work in 
 
 ### 2.1 Proof of Concept Reactor Model
 
-This folder contains notebooks developing the proofs of concept of two application of machine learning to chemical reactors. These notebooks should be consulted for the background information and theory behind the applications themselves. Information regarding the generation of a synthetic dataset is also contained in these notebooks.
+This folder contains notebooks developing the proofs of concept of two application of machine learning to chemical reactors. These notebooks should be consulted for the background information and theory behind the applications themselves. Information regarding the generation of a synthetic dataset is also contained in these notebooks. 
+
+This project focuses on further developing the concepts in the notebook for Part 1.
 
 Part 1: Project demonstrating how machine learning can be used to model the relationship between the process conditions and the overall yield of a chemical reactor.
 
